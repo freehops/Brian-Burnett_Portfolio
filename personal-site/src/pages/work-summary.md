@@ -1,5 +1,5 @@
 ---
-layout: ../../layouts/Blog.astro
+layout: ../layouts/Blog.astro
 title: 'Beyong Technology'
 subtitle: 'A summary of my work'
 poster: '/images/adventure.jpg'
