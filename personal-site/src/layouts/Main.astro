@@ -1,7 +1,14 @@
 ---
 import Footer from '../components/Footer.astro'
 import NavigationBar from '../components/NavigationBar.astro'
+
 import '../styles/global.css'
+
+type Props = {
+    title: string
+}
+
+const { title } = Astro.props
 ---
 
 <html lang="en">
@@ -11,13 +18,45 @@ import '../styles/global.css'
         <meta name="viewport" content="width=device-width" />
         <meta name="generator" content={Astro.generator} />
         <meta name="description" content="Brian Burnett's website" />
-        <title>Astro</title>
+        <title>{title}</title>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
         <link
             href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap"
             rel="stylesheet"
         />
+
+        <script is:inline>
+            const DARK_THEME_CLASS = 'dark'
+            const COLOR_MODE = 'COLOR_MODE'
+            const LIGHT_THEME = 'LIGHT'
+            const DARK_THEME = 'DARK'
+
+            const rootEl = document.documentElement
+
+            const getInitialColorMode = () => {
+                const previouslySavedColorMode =
+                    window.localStorage.getItem(COLOR_MODE)
+                if (previouslySavedColorMode) return previouslySavedColorMode
+
+                if (window.matchMedia('prefers-color-scheme: dark').matches)
+                    return DARK_THEME
+
+                return LIGHT_THEME
+            }
+
+            const intialColorMode = getInitialColorMode()
+
+            const setInitialColorMode = (mode) => {
+                if (mode === LIGHT_THEME) {
+                    rootEl.classList.remove(DARK_THEME_CLASS)
+                } else {
+                    rootEl.classList.add(DARK_THEME_CLASS)
+                }
+            }
+
+            setInitialColorMode(intialColorMode)
+        </script>
     </head>
     <body>
         <main>

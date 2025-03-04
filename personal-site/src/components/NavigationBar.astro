@@ -8,15 +8,15 @@ import ThemeToggler from './ThemeToggler.astro'
             <a href="/">Home</a>
         </li>
         <li>
-            <a href="#">Philosophies</a>
+            <a href="/philosophies">Philosophies</a>
         </li>
         <li>
-            <a href="#">Beyond Technology</a>
+            <a href="/beyond-tech">Beyond Technology</a>
         </li>
     </ul>
+    <ThemeToggler />
 </nav>
 
-<ThemeToggler />
 <style>
     nav {
         display: flex;
@@ -44,4 +44,21 @@ import ThemeToggler from './ThemeToggler.astro'
     a:hover {
         color: var(--grey-900);
     }
+
+    a.active {
+        background: var(--grey-900);
+        color: var(--background);
+    }
 </style>
+
+<script>
+    const { pathname } = window.location
+
+    const activeNavvigationElement = document.querySelector(
+        `nav a[href="${pathname}"]`
+    )
+
+    if (activeNavvigationElement) {
+        activeNavvigationElement.classList.add('active')
+    }
+</script>
